@@ -1,89 +1,78 @@
-import ExperienceCard from "../ExperienceCard"; // adjust path as needed
-import { useState } from "react"
-import ExperiencePopup from "../ExperiencePopup"; // adjust path as needed
+import { useState } from 'react'
+import ExperienceCard from '../ExperienceCard'
+import ExperiencePopup from '../ExperiencePopup'
+import { experiencesData, projectsData } from '../../data/portfolioData'
 
-import "./index.scss";
-
-const experiences = [
-  {
-    title: "Program Coordinator",
-    company: "Creative Encounters",
-    companyDescription: "provides STEM camps, programs, clubs, events and workshops for students in elementary and high school. Through fun, hands-on activities, we aim to ignite curiosity, boost confidence, and inspire the next generation of young innovators.",
-    date: "May 2026 – Present",
-    description:
-      "Directly managed, trained, and mentored a team of 15 instructors in the planning and execution of STEM workshops and community initiatives. Reviewed safety protocols, budgets, and Ontario Curriculum relevancy of all activities run in the camp. Coordinated programming that reached 1,695 students from May - August",
-    learningGoals:[
-        {
-            goal:"As I am a team leader leading a team of 15 individuals, I wish to develop adequate oral communication skills to be able to deliver concise, clear instructions. I hope to not cause any confusion amongst the instructors, and strong oral communication skills will be extremely beneficial.",
-            achievement:"I feel as though I have been successful in my goal. This summer has been flowing extremely smoothly all-things-considered, and I believe it is in part due to my leadership. I provide the instructors with relevant information when needed, and I provide it in clear and concise manners. For the first two months of my terms, I developed a ton of oral speaking skills as I was working with the team in developing their camp sections. The past two months of July and August I have been floating through the camp rooms, providing necessary information when needed."
-        },
-        {
-            goal:"Since I am going to be leading a team of 15, leadership skills will be crucial. My goal here is to be a strong leader for the team; one they can look up to as well as depend on.",
-            achievement:"There are still two weeks left of summer camp as of writing this reflection, however the previous 6 weeks have been overall smooth given everything. Each summer camp section has run at least once, and they have all ran successfully which leads me to believe that I have successfully completed my goal. The Instructors will often come to me when they have to tell leadership something, which also reinforces my belief that I have been a dependable leader."
-        },
-        {
-            goal:"My last goal is to create an inclusive, safe environment for my other coordinators as and the instructors. I want everyone to be excited to come into work every day, and know that this is a place where they can express themselves and voice their opinions. I do not want them to feel unheard and uncomfortable.",
-            achievement:"There have been a couple concerns this summer between instructors. When I was faced with them, I quickly nipped it in the bud in order to ensure that the situation did not escalate and was addressed in a timely manner. We have also had numerous team bonding events (during work hours, specifically in May and June) and the team was always able to get along! There are so many different personalities on the team, and me and my coworkers have made an accepting, inclusive space for all members. Leadership also had to deal with a bigger situation involving campus security, and that was handled in a delicate manner while providing the necessary safety steps for the instructors involved. Due to this, I believe that I have helped to create a safe, inclusive environment for the instructors."
-        }
-    ]
-  },
-  {
-    title: "STEM Instructor",
-    company: "Creative Encounters",
-    companyDescription: "provides STEM camps, programs, clubs, events and workshops for students in elementary and high school. Through fun, hands-on activities, we aim to ignite curiosity, boost confidence, and inspire the next generation of young innovators.",
-    date: "May 2025 – April 2026",
-    description:
-      "Developed a 40 hour Game Design course for youth aged grade 6-8. Utilized python as well as pygame in order to deliver the course, allowing for youth to develop general coding skills as well as create in depth games with custom art. Worked with a team of 10, creating professional interpersonal skills.",
-    learningGoals:[
-        {
-            goal:"To be able to create a thought-out, robust game design summer camp for grade 6-8's",
-            achievement:"Every week came with different minds. On average, I would say the campers left the camp with a working game, and overall a decent grasp on how to tweak and change certain mechanics of the game (e.g. the velocity of enemies, the damage/health of characters). My game design schedule worked well, however I did have to remove the flappy bird demo as it took too much time to complete and the campers would always rather work on their own games. Overall, I believe I was successful in achieving the goal I set for myself."
-        },
-        {
-            goal:"To be a consistent, strong leader to the campers. Seeing as I will be teaching Grade's 6-8, I must be a patient, yet firm, instructor, as this age group could pose a challenge due to a multitude of personal factors.",
-            achievement:"I was worried about this goal, as I had never worked with youth before. However, the past 4 months have shown me I am able to be a consistent, strong leader for the campers. I have not had any major issues in the camp room, and have not had to go to a guardian all camp season which, to me, shows that I am able to deescalate situations and also the campers have some level of respect for me where they will listen when needed. I have also felt confident in my abilities when I have reflected periodically throughout the season, as I check in with myself and how I'm doing every so often so I am always the best version of myself. Every week has been unique, and overall I have really enjoyed my time working at this job and instructing youth with the intention to increase interest in STEM."
-        },
-        {
-            goal:"Seeing as I have 9 other Instructors I will be working with throughout the summer, my third goal is teamwork. My goal is to be able to work with such a large group. I have historically worked in teams that reached the largest of 4, so working with a gorup of this size is new to me and I want to be able to get along with each individual on this team",
-            achievement:"I excelled at this goal. I get along great with all my co-instructors and coordinators, save a couple of co-instructors. I have formed close relationships with numerous of my co-isntructors, and can work well with all of them even if we are not the closest. I can say without a doubt that I have exceeded my own expectations with this goal."
-        }
-    ]
-  }
-//   {
-//     title: "Data Analyst Intern",
-//     company: "DataWorks",
-//     date: "Jan 2024 – Apr 2024",
-//     description:
-//       "Analyzed datasets, created visualizations, and helped automate reporting pipelines."
-//   },
-//   {
-//     title: "Teaching Assistant",
-//     company: "University of Example",
-//     date: "Sept 2023 – Dec 2023",
-//     description:
-//       "Assisted students with programming assignments, led lab tutorials, and provided one-on-one mentorship."
-//   }
-];
-
-const ExperiencePage = () => {
-  const [selectedExperience, setSelectedExperience] = useState(null);
+const Experience = () => {
+  const [selectedExperience, setSelectedExperience] = useState(null)
 
   return (
-    <div className="page experience-page">
-      <h1 className="experience-heading">My Experience</h1>
-      <div className="experience-list">
-        {experiences.map((exp, index) => (
+    <div className="space-y-10">
+      {/* Page Banner (matches experience_page.jpg) */}
+      <header className="text-center border-b border-rule pb-5">
+        <h1 className="font-display font-black text-2xl sm:text-4xl lg:text-[2.85rem] leading-tight tracking-tight text-ink uppercase">
+          RECORD OF PROGRESS: RECENT CHRONICLES
+        </h1>
+        <p className="font-serif text-base sm:text-xl text-ink/90 mt-2">
+          A comprehensive account of engineering, system design, research, and STEM leadership.
+        </p>
+      </header>
+
+      {/* Experience Timeline */}
+      <section className="space-y-7" aria-label="Professional experience">
+        {experiencesData.map((exp) => (
           <ExperienceCard
-            key={index}
-            title={exp.title}
-            company={exp.company}
-            companyDescription={exp.companyDescription}
-            date={exp.date}
-            description={exp.description}
-            onClick={() => setSelectedExperience(exp)}
+            key={exp.id}
+            experience={exp}
+            onSelect={(item) => setSelectedExperience(item)}
           />
         ))}
-      </div>
+      </section>
+
+      {/* Engineering Projects Section (from Resume) */}
+      <section className="pt-4 border-t-2 border-rule" aria-label="Selected engineering projects">
+        <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-rule pb-2.5 mb-6">
+          <h2 className="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-ink">
+            SELECTED ENGINEERING DISPATCHES &amp; PROJECTS
+          </h2>
+          <span className="font-mono text-xs uppercase tracking-wider text-ink-muted">
+            Full-Stack • Microservices • Applied AI
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {projectsData.map((project) => (
+            <article
+              key={project.id}
+              className="border border-rule p-4 bg-paper-card/45 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 text-[11px] font-mono uppercase text-ink-muted mb-2">
+                  <span className="border border-rule/60 px-1.5 py-0.5 bg-paper">
+                    {project.category}
+                  </span>
+                  <span>{project.date}</span>
+                </div>
+
+                <h3 className="font-display font-bold text-lg leading-snug text-ink uppercase">
+                  {project.headline}
+                </h3>
+                <p className="font-mono text-[11px] text-ink-muted mt-1">{project.subtitle}</p>
+
+                <ul className="font-serif text-[13.5px] leading-relaxed text-ink space-y-2 mt-3 pl-4 list-disc">
+                  {project.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-4 pt-2.5 border-t border-rule/50 text-right font-mono text-[11px] uppercase tracking-wider font-semibold text-ink">
+                {project.badge}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       {selectedExperience && (
         <ExperiencePopup
@@ -92,8 +81,7 @@ const ExperiencePage = () => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-
-export default ExperiencePage;
+export default Experience
