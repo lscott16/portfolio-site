@@ -69,7 +69,7 @@ const Home = () => {
               Lead Dispatch
             </div>
             <h2 className="font-display font-bold text-2xl sm:text-3xl leading-tight text-ink uppercase">
-              FROM MICROSERVICES TO CLASSROOMS: AN ENGINEER&apos;S LEDGER
+              FROM MICROSERVICES TO CLASSROOMS
             </h2>
             <p className="font-serif text-[15px] leading-relaxed text-ink text-justify drop-cap">
               Lucas Scott is a Computer Science (Honours Co-op) major and Economics minor at the
